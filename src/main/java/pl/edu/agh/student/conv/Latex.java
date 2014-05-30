@@ -1,10 +1,13 @@
-package pl.edu.agh.student.jpelc.conv;
+package pl.edu.agh.student.conv;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+
+import pl.edu.agh.student.jpelc.conv.LatexLexer;
+import pl.edu.agh.student.jpelc.conv.LatexParser;
 
 public class Latex {
 
