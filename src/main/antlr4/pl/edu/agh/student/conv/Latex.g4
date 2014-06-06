@@ -13,7 +13,7 @@ classtype	:	LCB KW_CT_NAME RCB ;
 
 usepkg		:	KW_USEPKG opt? arg ;
 
-opt			:	LSB OPTIONS RCB ;
+opt			:	OPTIONS ;
 
 arg			:	LCB STRING RCB ;
 
@@ -106,6 +106,6 @@ TILDE			:	'\\~{}' ;
 //others
 FONTSIZE		:	[0-9]? [0-9] 'pt' ;
 STRING			:	'STRING' ;
-OPTIONS			:	'OPTIONS' ;
+OPTIONS			:	LSB .*? RSB ;
 LINE_COMMENT	:   '%' ~[\r\n]* -> skip ;
 WS				:	[ \t\r\n]+ -> skip ;

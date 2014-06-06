@@ -5,9 +5,7 @@ import java.io.IOException;
 
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
-
-import pl.edu.agh.student.conv.generated.LatexLexer;
-import pl.edu.agh.student.conv.generated.LatexParser;
+import org.antlr.v4.runtime.RuleContext;
 
 public class Latex {
 
@@ -17,7 +15,8 @@ public class Latex {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		LatexParser parser = new LatexParser(tokens);
 		parser.setBuildParseTree(true);
-
+		RuleContext rc = parser.document();
+		rc.inspect(parser);
 	}
 
 }
