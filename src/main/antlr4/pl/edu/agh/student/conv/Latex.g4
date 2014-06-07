@@ -5,25 +5,21 @@ document	:	preamble body ;
 
 preamble	:	docclass usepkg* docinfo? docinfo? docinfo? ;
 
-docclass	:	KW_DOCUMENTCLASS classopts? classtype ;
+docclass	:	KW_DOCUMENTCLASS OPT? ARG ;
 
 classopts	:	LSB FONTSIZE? (COMMA KW_PAPERTYPE)? RSB;
 
 classtype	:	LCB KW_CT_NAME RCB ;
 
-usepkg		:	KW_USEPKG opt? arg ;
-
-opt			:	OPTIONS ;
-
-arg			:	LCB STRING RCB ;
+usepkg		:	KW_USEPKG OPT? ARG;
 
 docinfo		:	(authorinfo | titleinfo | dateinfo) ;
 
-authorinfo	:	KW_DOCAUTHOR arg ;
+authorinfo	:	KW_DOCAUTHOR ARG ;
 
-titleinfo	:	KW_DOCTITLE arg ;
+titleinfo	:	KW_DOCTITLE ARG ;
 
-dateinfo	:	KW_DOCDATE arg ;
+dateinfo	:	KW_DOCDATE ARG ;
 
 body		:	begindoc content enddoc ;
 
@@ -37,7 +33,7 @@ inserttitle	:	KW_MAKETITLE ;
 
 text		:	(STRING | expr | environment | quote | specialchar)+ ;
 
-expr		:	command arg? ;
+expr		:	command ARG? ;
 
 command		:	KW_NEWLINE | KW_SLASH | KW_TEXTBACKSLASH | KW_LDOTS | KW_UNDERLINE | KW_EMPH ;
 
@@ -49,12 +45,11 @@ quote		:	OQM STRING CQM ;
 
 specialchar	:	HASH | DOLAR | PERCENT | CARET | AMPERSAND | UNDERSCORE | CH_LCB | CH_RCB | TILDE ;
 
-section		:	KW_SECTION arg (text | subsection)* ;
+section		:	KW_SECTION ARG (text | subsection)* ;
 
-subsection	:	KW_SUBSECTION arg (text | subsubsection)* ;
+subsection	:	KW_SUBSECTION ARG (text | subsubsection)* ;
 
-subsubsection:	KW_SUBSUBSECTION arg text* ;
-
+subsubsection:	KW_SUBSUBSECTION ARG text* ;
 
 
 //LEXER RULES
@@ -106,6 +101,7 @@ TILDE			:	'\\~{}' ;
 //others
 FONTSIZE		:	[0-9]? [0-9] 'pt' ;
 STRING			:	'STRING' ;
-OPTIONS			:	LSB .*? RSB ;
+OPT				:	LSB .*? RSB ;
+ARG				:	LCB .*? RCB ;
 LINE_COMMENT	:   '%' ~[\r\n]* -> skip ;
 WS				:	[ \t\r\n]+ -> skip ;
