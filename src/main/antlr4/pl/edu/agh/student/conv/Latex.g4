@@ -1,55 +1,70 @@
 grammar Latex;
 
+
 //PARSER RULES
 document	:	preamble body ;
 
 preamble	:	docclass usepkg* docinfo? docinfo? docinfo? ;
 
-docclass	:	KW_DOCUMENTCLASS OPT? ARG ;
+docclass	:	KW_DOCUMENTCLASS CLASSOPT? CLASSARG ;
 
-classopts	:	LSB FONTSIZE? (COMMA KW_PAPERTYPE)? RSB;
+usepkg		:	KW_USEPKG opt? arg;
 
-classtype	:	LCB KW_CT_NAME RCB ;
+arg			:	ARG ;
 
-usepkg		:	KW_USEPKG OPT? ARG;
+opt			:	OPT ;
 
 docinfo		:	(authorinfo | titleinfo | dateinfo) ;
 
-authorinfo	:	KW_DOCAUTHOR ARG ;
+authorinfo	:	KW_DOCAUTHOR arg ;
 
-titleinfo	:	KW_DOCTITLE ARG ;
+titleinfo	:	KW_DOCTITLE arg ;
 
-dateinfo	:	KW_DOCDATE ARG ;
+dateinfo	:	KW_DOCDATE arg ;
 
 body		:	begindoc content enddoc ;
 
-begindoc	:	KW_BEGIN LCB KW_DOCUMENT RCB ;
+begindoc	:	KW_BEGIN DOCARG ;
 
-enddoc		:	KW_END LCB KW_DOCUMENT RCB ;
+enddoc		:	KW_END DOCARG ;
 
-content		:	docinfo? docinfo? docinfo? inserttitle? (text | section)* ;
+content		:	docinfo? docinfo? docinfo? inserttitle? anything ;
+
+anything	:	(text | environment | section)* ;
 
 inserttitle	:	KW_MAKETITLE ;
 
-text		:	(STRING | expr | environment | quote | specialchar)+ ;
+text		:	(string | expr | quote | specialchar)+ ;
 
-expr		:	command ARG? ;
+string		:	STRING ;
 
-command		:	KW_NEWLINE | KW_SLASH | KW_TEXTBACKSLASH | KW_LDOTS | KW_UNDERLINE | KW_EMPH ;
+expr		:	command ;
 
-environment	:	KW_BEGIN LCB KW_ENV_NAME RCB (STRING | item)+ KW_END LCB KW_ENV_NAME RCB ;
+command		:	KW_NEWLINE | NEWLINE | KW_SLASH | KW_TEXTBACKSLASH | KW_LDOTS | underline | emph | KW_TODAY;
 
-item		:	KW_ITEM STRING* ;
+underline	:	KW_UNDERLINE arg ;
 
-quote		:	OQM STRING CQM ;
+emph		:	KW_EMPH arg ;
+
+environment	:	beginenv envcontent endenv ;
+
+envcontent	:	(text | item)+ ;
+
+beginenv	:	KW_BEGIN ENVARG ;
+
+endenv		:	KW_END ENVARG ;
+
+item		:	KW_ITEM text* ;
+
+quote		:	QUOTE ;
 
 specialchar	:	HASH | DOLAR | PERCENT | CARET | AMPERSAND | UNDERSCORE | CH_LCB | CH_RCB | TILDE ;
 
-section		:	KW_SECTION ARG (text | subsection)* ;
+section		:	KW_SECTION arg (text | environment | subsection)* ;
 
-subsection	:	KW_SUBSECTION ARG (text | subsubsection)* ;
+subsection	:	KW_SUBSECTION arg (text | environment | subsubsection)* ;
 
-subsubsection:	KW_SUBSUBSECTION ARG text* ;
+subsubsection:	KW_SUBSUBSECTION arg (text | environment)* ;
 
 
 //LEXER RULES
@@ -60,6 +75,7 @@ KW_USEPKG		:	'\\usepackage' ;
 KW_DOCAUTHOR	:	'\\author' ;
 KW_DOCTITLE		:	'\\title' ;
 KW_DOCDATE		:	'\\date' ;
+KW_TODAY		:	'\\today' ;
 KW_BEGIN		:	'\\begin' ;
 KW_END			:	'\\end' ;
 KW_NEWLINE		:	'\\newline' ;
@@ -77,7 +93,6 @@ KW_CT_NAME		:	'article' ;
 KW_PAPERTYPE	:	'a4paper' ;
 KW_DOCUMENT		:	'document' ;
 KW_ENV_NAME		:	'itemize' | 'enumarate' | 'flushleft' | 'flushright' | 'center' ;
-
 
 //special
 LSB				:	'[' ;
@@ -99,9 +114,14 @@ CH_RCB			:	'\\}' ;
 TILDE			:	'\\~{}' ;
 
 //others
+LINE_COMMENT	:   '%' .*? '\n' -> skip ;
+WS				:	[ \t\r\n]+ -> skip ;
 FONTSIZE		:	[0-9]? [0-9] 'pt' ;
-STRING			:	'STRING' ;
+QUOTE			:	OQM .*? CQM ;
+STRING			:	~[\[\]{}\\%`'\t\r\n]+ ;
+CLASSOPT		:	LSB FONTSIZE? (COMMA KW_PAPERTYPE)? RSB ;
+CLASSARG		:	LCB KW_CT_NAME RCB ;
+DOCARG			:	LCB KW_DOCUMENT RCB ;
+ENVARG			:	LCB KW_ENV_NAME RCB ;
 OPT				:	LSB .*? RSB ;
 ARG				:	LCB .*? RCB ;
-LINE_COMMENT	:   '%' ~[\r\n]* -> skip ;
-WS				:	[ \t\r\n]+ -> skip ;
