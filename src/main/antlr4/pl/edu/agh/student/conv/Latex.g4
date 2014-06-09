@@ -6,7 +6,9 @@ document	:	preamble body ;
 
 preamble	:	docclass usepkg* docinfo? docinfo? docinfo? ;
 
-docclass	:	KW_DOCUMENTCLASS CLASSOPT? CLASSARG ;
+docclass	:	KW_DOCUMENTCLASS classopt? CLASSARG ;
+
+classopt	:	CLASSOPT ;
 
 usepkg		:	KW_USEPKG opt? arg;
 
