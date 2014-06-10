@@ -95,7 +95,7 @@ KW_ITEM			:	'\\item' ;
 KW_CT_NAME		:	'article' ;
 KW_PAPERTYPE	:	'a4paper' ;
 KW_DOCUMENT		:	'document' ;
-KW_ENV_NAME		:	'itemize' | 'enumarate' | 'flushleft' | 'flushright' | 'center' ;
+KW_ENV_NAME		:	'itemize' | 'enumarate' | 'flushleft' | 'flushright' | 'center' | 'quote' | 'verbatim';
 
 //special
 LSB				:	'[' ;

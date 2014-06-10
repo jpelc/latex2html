@@ -1,5 +1,8 @@
 package pl.edu.agh.student.conv.extras;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.DocumentType;
 import org.jsoup.nodes.Element;
@@ -14,7 +17,10 @@ import pl.edu.agh.student.conv.LatexParser.CommandContext;
 import pl.edu.agh.student.conv.LatexParser.DateinfoContext;
 import pl.edu.agh.student.conv.LatexParser.DocclassContext;
 import pl.edu.agh.student.conv.LatexParser.DocumentContext;
+import pl.edu.agh.student.conv.LatexParser.EmphContext;
+import pl.edu.agh.student.conv.LatexParser.EndenvContext;
 import pl.edu.agh.student.conv.LatexParser.InserttitleContext;
+import pl.edu.agh.student.conv.LatexParser.ItemContext;
 import pl.edu.agh.student.conv.LatexParser.QuoteContext;
 import pl.edu.agh.student.conv.LatexParser.SectionContext;
 import pl.edu.agh.student.conv.LatexParser.SpecialcharContext;
@@ -57,13 +63,12 @@ public class Latex2HTMLListener extends LatexBaseListener {
 	public void exitDocclass(DocclassContext ctx) {
 		document.head()
 				.appendElement("style")
-				.text("body {\n" + "font-family: Georgia, serif;\n"
-						+ "font-size: " + fontSize + "px;\n" + "margin: 0;\n"
-						+ "padding: 0;\n" + "}\n" + "#a4content {\n"
-						+ "width: 21cm;\n" + "padding: 2cm;\n"
-						+ "margin: 1cm auto;\n" + "}\n" + "#titleBlock {\n"
-						+ "width: 21cm;\n" + "padding: 1cm;\n"
-						+ "margin: 3cm auto 5cm auto;\n" + "}\n"
+				.text("body {" + "font-family: Georgia, serif;" + "font-size: "
+						+ fontSize + "px;" + "margin: 0;" + "padding: 0;" + "}"
+						+ "#a4content {" + "width: 21cm;" + "padding: 2cm;"
+						+ "margin: 1cm auto;" + "}" + "#titleBlock {"
+						+ "width: 21cm;" + "padding: 1cm;"
+						+ "margin: 3cm auto;" + "}"
 
 				);
 	}
@@ -114,24 +119,30 @@ public class Latex2HTMLListener extends LatexBaseListener {
 		if (titleSet) {
 			Element titleBlock = document.body().prependElement("div")
 					.attr("id", "titleBlock");
-			titleBlock.appendElement("h1").attr("style", "text-align:center;").text(document.head().select("title").text());
+			titleBlock.appendElement("h1").attr("style", "text-align:center;")
+					.text(document.head().select("title").html());
 			if (author != null)
-				titleBlock.appendElement("h2").attr("style", "text-align:center;").text(author);
+				titleBlock.appendElement("h2")
+						.attr("style", "text-align:center;").text(author);
 			if (date != null)
-				titleBlock.appendElement("h3").attr("style", "text-align:center;").text(date);
+				titleBlock.appendElement("h3")
+						.attr("style", "text-align:center;").text(date);
 		}
 	}
 
 	@Override
 	public void enterAnything(AnythingContext ctx) {
 		if (content.select("p").size() == 0)
-			content.appendElement("p");
+			current = content.appendElement("p");
 	}
 
 	@Override
 	public void enterString(StringContext ctx) {
-		if (current != null)
-			current.appendText(ctx.getText());
+		if (current != null) {
+			if (current.html().length() != 0)
+				current.appendText(" ");
+			current.appendText(ctx.getText().trim());
+		}
 	}
 
 	@Override
@@ -139,7 +150,8 @@ public class Latex2HTMLListener extends LatexBaseListener {
 		subsection = subsubsection = 0;
 		String sectionName = ctx.getChild(1).getText().substring(1);
 		sectionName = sectionName.substring(0, sectionName.length() - 1).trim();
-		content.appendElement("h2").attr("class", "section").text(++section + ". " + sectionName);
+		content.appendElement("h2").attr("class", "section")
+				.text(++section + ". " + sectionName);
 		current = content.appendElement("p");
 	}
 
@@ -148,7 +160,8 @@ public class Latex2HTMLListener extends LatexBaseListener {
 		subsubsection = 0;
 		String sectionName = ctx.getChild(1).getText().substring(1);
 		sectionName = sectionName.substring(0, sectionName.length() - 1).trim();
-		content.appendElement("h3").attr("class", "subsection").text(section + "." + ++subsection + ". " + sectionName);
+		content.appendElement("h3").attr("class", "subsection")
+				.text(section + "." + ++subsection + ". " + sectionName);
 		current = content.appendElement("p");
 	}
 
@@ -156,38 +169,149 @@ public class Latex2HTMLListener extends LatexBaseListener {
 	public void enterSubsubsection(SubsubsectionContext ctx) {
 		String sectionName = ctx.getChild(1).getText().substring(1);
 		sectionName = sectionName.substring(0, sectionName.length() - 1).trim();
-		content.appendElement("h4").attr("class", "subsubsection").text(section + "." + subsection + "." + ++subsubsection + ". " + sectionName);
+		content.appendElement("h4")
+				.attr("class", "subsubsection")
+				.text(section + "." + subsection + "." + ++subsubsection + ". "
+						+ sectionName);
 		current = content.appendElement("p");
 	}
 
 	@Override
 	public void enterUnderline(UnderlineContext ctx) {
-		// TODO Auto-generated method stub
-		super.enterUnderline(ctx);
+		String text = ctx.getChild(1).getText();
+		text = text.substring(1);
+		text = text.substring(0, text.length() - 1).trim();
+		if (current.html().length() != 0)
+			current.appendText(" ");
+		current.appendElement("span")
+				.attr("style", "text-decoration:underline;").text(text);
+	}
+
+	@Override
+	public void enterEmph(EmphContext ctx) {
+		String text = ctx.getChild(1).getText();
+		text = text.substring(1);
+		text = text.substring(0, text.length() - 1).trim();
+		if (current.html().length() != 0)
+			current.appendText(" ");
+		current.appendElement("em").text(text);
 	}
 
 	@Override
 	public void enterSpecialchar(SpecialcharContext ctx) {
-		// TODO Auto-generated method stub
-		super.enterSpecialchar(ctx);
+		String result = String.valueOf(ctx.getText().charAt(1));
+		if (current.html().length() != 0)
+			current.appendText(" ");
+		current.appendText(result);
 	}
 
 	@Override
 	public void enterQuote(QuoteContext ctx) {
-		// TODO Auto-generated method stub
-		super.enterQuote(ctx);
-	}
-
-	@Override
-	public void enterBeginenv(BeginenvContext ctx) {
-		// TODO Auto-generated method stub
-		super.enterBeginenv(ctx);
+		String result = ctx.getText().substring(2);
+		result = result.substring(0, result.length() - 2).trim();
+		if (current.html().length() != 0)
+			current.appendText(" ");
+		current.appendElement("q").text(result);
 	}
 
 	@Override
 	public void enterCommand(CommandContext ctx) {
-		// TODO Auto-generated method stub
-		super.enterCommand(ctx);
+		switch (ctx.getText()) {
+		case "\\par":
+			current = content.appendElement("p");
+			break;
+		case "\\newline":
+			current.appendElement("br");
+			break;
+		case "\\\\":
+			current.appendElement("br");
+			break;
+		case "\\slash":
+			current.appendText("/");
+			break;
+		case "\\textbackslash":
+			current.appendText("\\");
+			break;
+		case "\\ldots":
+			current.append("&hellip;");
+			break;
+		case "\\today":
+			if (current.html().length() != 0)
+				current.appendText(" ");
+			current.appendText(new SimpleDateFormat("dd.MM.yyyy")
+					.format(Calendar.getInstance().getTime()));
+			break;
+		}
+	}
+
+	@Override
+	public void enterBeginenv(BeginenvContext ctx) {
+		String envName = ctx.getChild(1).getText();
+		envName = envName.substring(1);
+		envName = envName.substring(0, envName.length() - 1).trim();
+		switch (envName) {
+		case "itemize":
+			if (current.tagName().equals("p"))
+				current = current.parent().appendElement("ul");
+			else
+				current = current.appendElement("ul");
+			break;
+		case "enumarate":
+			if (current.tagName().equals("p"))
+				current = current.parent().appendElement("ol");
+			else
+				current = current.appendElement("ol");
+			break;
+		case "flushleft":
+			current = current.appendElement("span").attr("style",
+					"display: block; text-align:left;");
+			break;
+		case "flushright":
+			current = current.appendElement("span").attr("style",
+					"display: block; text-align:right;");
+			break;
+		case "center":
+			current = current.appendElement("span").attr("style",
+					"display: block; text-align:center;");
+			break;
+		case "quote":
+			if (current.tagName().equals("p"))
+				current = current.parent().appendElement("blockquote");
+			else
+				current = current.appendElement("blockquote");
+			break;
+		case "verbatim":
+			if (current.tagName().equals("p"))
+				current = current.parent().appendElement("pre");
+			else
+				current = current.appendElement("pre");
+			break;
+		}
+	}
+
+	@Override
+	public void enterEndenv(EndenvContext ctx) {
+		String envName = ctx.getChild(1).getText();
+		envName = envName.substring(1);
+		envName = envName.substring(0, envName.length() - 1).trim();
+		if(envName.equals("flushleft") || envName.equals("flushright") || envName.equals("center"))  {
+			while(!current.tagName().equals("span"))
+				current = current.parent();
+			current = current.parent();
+		} else {
+			current = content.appendElement("p");
+		}
+	}
+
+	@Override
+	public void enterItem(ItemContext ctx) {
+		current = current.appendElement("li");
+	}
+
+	@Override
+	public void exitItem(ItemContext ctx) {
+		while(!current.tagName().equals("ol") && !current.tagName().equals("ul"))
+			current = current.parent();
 	}
 
 }

@@ -29,7 +29,8 @@ public class Converter {
 		Latex2HTMLListener listener = new Latex2HTMLListener();
 		walker.walk(listener, rc);
 
-		BufferedWriter writer = Files.newBufferedWriter(Paths.get("output.html"));
+		BufferedWriter writer = Files.newBufferedWriter(Paths
+				.get("output.html"));
 		writer.write(listener.getHtml());
 		writer.close();
 
