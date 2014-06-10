@@ -30,9 +30,9 @@ begindoc	:	KW_BEGIN DOCARG ;
 
 enddoc		:	KW_END DOCARG ;
 
-content		:	docinfo? docinfo? docinfo? inserttitle? anything ;
+content		:	docinfo? docinfo? docinfo? inserttitle? anything* ;
 
-anything	:	(text | environment | section)* ;
+anything	:	(text | environment | section) ;
 
 inserttitle	:	KW_MAKETITLE ;
 
@@ -42,7 +42,7 @@ string		:	STRING ;
 
 expr		:	command ;
 
-command		:	KW_NEWLINE | NEWLINE | KW_SLASH | KW_TEXTBACKSLASH | KW_LDOTS | underline | emph | KW_TODAY;
+command		:	KW_PARAGRAPH | KW_NEWLINE | NEWLINE | KW_SLASH | KW_TEXTBACKSLASH | KW_LDOTS | underline | emph | KW_TODAY;
 
 underline	:	KW_UNDERLINE arg ;
 
@@ -56,7 +56,7 @@ beginenv	:	KW_BEGIN ENVARG ;
 
 endenv		:	KW_END ENVARG ;
 
-item		:	KW_ITEM text* ;
+item		:	KW_ITEM text ;
 
 quote		:	QUOTE ;
 
@@ -80,6 +80,7 @@ KW_DOCDATE		:	'\\date' ;
 KW_TODAY		:	'\\today' ;
 KW_BEGIN		:	'\\begin' ;
 KW_END			:	'\\end' ;
+KW_PARAGRAPH	:	'\\par' ;
 KW_NEWLINE		:	'\\newline' ;
 KW_SLASH		:	'\\slash' ;
 KW_TEXTBACKSLASH:	'\\textbackslash' ;
