@@ -1,6 +1,7 @@
 package pl.edu.agh.student.conv.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -43,9 +44,12 @@ public class LaTeX2HTML {
 	private JTextArea leftTextArea;
 	private JTextArea rightTextArea;
 	private JTextArea logTextArea;
+	private JLabel lblInputTexFile;
+	private JLabel lblOutputHtmlFile;
 	private RuleContext rc;
 	private LatexParser parser;
 	private CustomErrorListener cel;
+	private File savedFile;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -103,6 +107,9 @@ public class LaTeX2HTML {
 		JButton btnShowParseTree = new JButton("Show parse tree");
 		headerPanel.add(btnShowParseTree);
 
+		JButton btnOpenInBrowser = new JButton("Open in browser");
+		headerPanel.add(btnOpenInBrowser);
+
 		JPanel mainPanel = new JPanel();
 		frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 		mainPanel.setLayout(new GridLayout(0, 2, 15, 0));
@@ -117,7 +124,7 @@ public class LaTeX2HTML {
 		leftTextArea.setFont(new Font("Courier New", Font.PLAIN, 12));
 		leftScrollPane.setViewportView(leftTextArea);
 
-		JLabel lblInputTexFile = new JLabel("Input TEX file:");
+		lblInputTexFile = new JLabel("Input TEX file:");
 		lblInputTexFile.setLabelFor(leftTextArea);
 		leftScrollPane.setColumnHeaderView(lblInputTexFile);
 
@@ -131,7 +138,7 @@ public class LaTeX2HTML {
 		rightTextArea.setFont(new Font("Courier New", Font.PLAIN, 12));
 		rightScrollPane.setViewportView(rightTextArea);
 
-		JLabel lblOutputHtmlFile = new JLabel("Output HTML file:");
+		lblOutputHtmlFile = new JLabel("Output HTML file:");
 		lblOutputHtmlFile.setLabelFor(rightTextArea);
 		rightScrollPane.setColumnHeaderView(lblOutputHtmlFile);
 
@@ -171,8 +178,9 @@ public class LaTeX2HTML {
 				fileChooser.setFileFilter(new FileNameExtensionFilter(
 						"TEX files only", "tex"));
 				fileChooser.setMultiSelectionEnabled(false);
+				File file = null;
 				if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
-					File file = fileChooser.getSelectedFile();
+					file = fileChooser.getSelectedFile();
 					try {
 						BufferedReader reader = Files.newBufferedReader(Paths
 								.get(file.getAbsolutePath()));
@@ -188,6 +196,7 @@ public class LaTeX2HTML {
 						return;
 					}
 				}
+				setLabel(lblInputTexFile, file.getAbsolutePath());
 			}
 		});
 
@@ -199,7 +208,7 @@ public class LaTeX2HTML {
 							"Information", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
-				boolean result = saveFile(leftTextArea);
+				boolean result = saveFile(leftTextArea, lblInputTexFile);
 				if (!result)
 					JOptionPane.showMessageDialog(frame,
 							"Saving input file failed.", "Error",
@@ -215,7 +224,7 @@ public class LaTeX2HTML {
 							"Information", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
-				boolean result = saveFile(rightTextArea);
+				boolean result = saveFile(rightTextArea, lblOutputHtmlFile);
 				if (!result)
 					JOptionPane.showMessageDialog(frame,
 							"Saving output file failed.", "Error",
@@ -239,6 +248,8 @@ public class LaTeX2HTML {
 				leftTextArea.setText("");
 				rightTextArea.setText("");
 				logTextArea.setText("");
+				setLabel(lblInputTexFile, "");
+				setLabel(lblOutputHtmlFile, "");
 			}
 		});
 
@@ -255,19 +266,24 @@ public class LaTeX2HTML {
 							|| result == JOptionPane.NO_OPTION)
 						return;
 				}
-				
-				if(leftTextArea.getText().length() == 0) {
-					JOptionPane.showMessageDialog(frame, "There is no content to convert in input area", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+				if (leftTextArea.getText().length() == 0) {
+					JOptionPane.showMessageDialog(frame,
+							"There is no content to convert in input area",
+							"Information", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
 				rightTextArea.setText("");
-				
-				LatexLexer lexer = new LatexLexer(new ANTLRInputStream(leftTextArea.getText()));
+
+				LatexLexer lexer = new LatexLexer(new ANTLRInputStream(
+						leftTextArea.getText()));
 				lexer.addErrorListener(cel);
 				CommonTokenStream tokens = new CommonTokenStream(lexer);
 				parser = new LatexParser(tokens);
-				if(parser == null) {
-					JOptionPane.showMessageDialog(frame, "Error occured: could not create a parser", "Conversion error", JOptionPane.ERROR_MESSAGE);
+				if (parser == null) {
+					JOptionPane.showMessageDialog(frame,
+							"Error occured: could not create a parser",
+							"Conversion error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				parser.addErrorListener(cel);
@@ -281,22 +297,45 @@ public class LaTeX2HTML {
 				rightTextArea.setText(listener.getHtml());
 			}
 		});
-		
+
 		btnShowParseTree.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(rc != null && parser != null)
+				if (rc != null && parser != null)
 					try {
 						rc.inspect(parser);
-					} catch (NullPointerException ex) {}
-					
+					} catch (NullPointerException ex) {
+					}
+
 				else {
-					JOptionPane.showMessageDialog(frame, "You have to run conversion first.", "Information", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame,
+							"You have to run conversion first.", "Information",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
+			}
+		});
+
+		btnOpenInBrowser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (rightTextArea.getText().length() == 0) {
+					JOptionPane.showMessageDialog(frame,
+							"There is no html code in output text area",
+							"Information", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+
+				if (saveFile(rightTextArea, lblOutputHtmlFile))
+					try {
+						Desktop.getDesktop().open(savedFile);
+					} catch (IOException e1) {
+						JOptionPane.showMessageDialog(frame,
+								"Error occured while opening file in browser",
+								"Error", JOptionPane.ERROR_MESSAGE);
+					}
 			}
 		});
 	}
 
-	private boolean saveFile(JTextComponent component) {
+	private boolean saveFile(JTextComponent component, JLabel label) {
 		JFileChooser fileChooser = new JFileChooser(Paths.get("")
 				.toAbsolutePath().toString());
 		fileChooser.setDialogTitle("Specify a file to save");
@@ -313,7 +352,15 @@ public class LaTeX2HTML {
 		} catch (IOException e) {
 			return false;
 		}
+		savedFile = file;
+		setLabel(label, file.getAbsolutePath());
 		return true;
+	}
+
+	private void setLabel(JLabel label, String text) {
+		String lbl = label.getText();
+		String ss = lbl.substring(0, lbl.indexOf(":") + 1);
+		label.setText(ss + " " + text);
 	}
 
 }
