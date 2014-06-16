@@ -11,6 +11,7 @@ import pl.edu.agh.student.conv.LatexBaseListener;
 import pl.edu.agh.student.conv.LatexParser.AuthorinfoContext;
 import pl.edu.agh.student.conv.LatexParser.BeginenvContext;
 import pl.edu.agh.student.conv.LatexParser.BodyContext;
+import pl.edu.agh.student.conv.LatexParser.BoldContext;
 import pl.edu.agh.student.conv.LatexParser.CellContext;
 import pl.edu.agh.student.conv.LatexParser.ClassoptContext;
 import pl.edu.agh.student.conv.LatexParser.CommandContext;
@@ -144,7 +145,7 @@ public class Latex2HTMLListener extends LatexBaseListener {
 						+ " 0 "
 						+ marginSize
 						+ "in;"
-						+ "margin: 0 auto;"
+						+ "margin: 0 auto; margin-bottom: 3in;"
 						+ "}"
 						+ "#titleBlock {"
 						+ "width: "
@@ -251,6 +252,16 @@ public class Latex2HTMLListener extends LatexBaseListener {
 		if (current.html().length() != 0)
 			current.appendText(" ");
 		current.appendElement("em").text(text);
+	}
+
+	@Override
+	public void enterBold(BoldContext ctx) {
+		String text = ctx.getChild(1).getText();
+		text = text.substring(1);
+		text = text.substring(0, text.length() - 1).trim();
+		if (current.html().length() != 0)
+			current.appendText(" ");
+		current.appendElement("b").text(text);
 	}
 
 	@Override
@@ -420,7 +431,7 @@ public class Latex2HTMLListener extends LatexBaseListener {
 			else
 				current = current.appendElement("ul");
 			break;
-		case "enumarate":
+		case "enumerate":
 			if (current.tagName().equals("p"))
 				current = current.parent().appendElement("ol");
 			else

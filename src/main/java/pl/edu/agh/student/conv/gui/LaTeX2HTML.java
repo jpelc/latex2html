@@ -62,13 +62,13 @@ public class LaTeX2HTML {
 
 	public LaTeX2HTML() {
 
-		try {
-			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException
-				| IllegalAccessException | UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			UIManager
+//					.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+//		} catch (ClassNotFoundException | InstantiationException
+//				| IllegalAccessException | UnsupportedLookAndFeelException e) {
+//			e.printStackTrace();
+//		}
 
 		initialize();
 		cel = new CustomErrorListener(logTextArea);
@@ -238,6 +238,7 @@ public class LaTeX2HTML {
 				}
 				leftTextArea.setText("");
 				rightTextArea.setText("");
+				logTextArea.setText("");
 			}
 		});
 

@@ -1,96 +1,119 @@
-% przyklad pracy w jeyku polskim
+\documentclass[10pt,a4paper]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{textgreek}
+\usepackage{textcomp}
+\usepackage[margin=1in]{geometry}
 
-\documentclass[14pt]{article}
-%\usepackage[OT4]{fontenc}
-%\usepackage[latin2]{inputenc}
-
-\title{Tytuł pracy}
-\author{Alojzy Babel}
-\date{2012}
+\title{Konwerter LaTeX2HTML}
+\author{Jakub Pelc, Tomasz Korecki}
+\date{2014}
 
 \begin{document}
 
 \maketitle
+%w dokumencie możliwe jest używanie jednoliniowych komentarzy
 
+\section{Wstęp}
+Ten dokument stanowi prezentację możliwości stworzonego przez nas konwertera. W poszczególnych rozdziałach i podrozdziałach przedstawione zostaną kolejne konstrukcje, które obsługiwane są przez aplikację.\par
+Ten tekst stanowi nowy akapit. W celu jego uzyskania zastosowana została komenda ``par'', która w tym tekście umieszczona została w cudzysłowie (który jest kolejną specjalną konstrukcją).\newline O proszę, nowa linia.
 
-\section{Wstep}
-Jasne ale \\ ale ``quoted'' ale \# ale \$ ale \% ale \^{} ale \& ale \_ ale \{ ale \} ale \~{} ale postawienie problemu, okreslenie \emph{Glownych Celow Pracy}.
+\section{Obsługiwane konstrukcje}
+W tym rozdziale przedstawione zostaną konstrukcje obsługiwane przez nasz konwerter.
 
-\subsection{adasdasda}
-asdasdasd sa dasd asd sadas das da sd as dasd as \par
-dasd asd asd sd asd asd as ads a sdasdasdas das \underline{dasdasd asd asdasdasd sas} da asdasdasdasd asd asda sd asd asdasd
+\subsection{Operacje na tekście}
+W tym podrozdziale przedstawione zostaną sposoby modyfikacji tekstu.
 
-\subsubsection{adasdasdaaaa}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd \newline
-asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
+\subsubsection{Emph}
+Tekst może być standardowy. Jednak możliwe jest, aby \emph{był wyróżniony}. Nie są to jednak jedyne możliwości jego modyfikacji. W dalszej części zostanie to udowodnione.
 
-\subsubsection{adasdasdaaaa}
-asdasdasd \slash sa \textbackslash dasd \ldots asd sadas \today das \ldots da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
+\subsubsection{Underline}
+Dotarliśmy do dowodu. Tekst może też być \underline{podkreślony}.
 
-\subsection{adasdassssda}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
-
-\begin{itemize}
-
-\item Co? Przedmiot, problem.
-
-\item Jak? (Metoda , króko).
-
-\item Dlaczego? \emph{erasa} problemu badawczego.
-
-\item Po co? Implikacje, \_ konsekwencje, walory.
-
-\item  Co bedzie w kolejnych rozdzialach?
-\end{itemize}
-
-asdasdasdaskjd kjasdkjh askjdh akjshd jashdk ashdkj askdj aksjdh kasjdh kajsh kjashdk jashdk jhaskjdh
-
-
-\section{Podstawy teoretyczne}
-Opis zagadnien zwiazanych z analizowanym problemem.
-
-\subsection{adasdasda}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
-
-\subsubsection{adasdasdaaaa}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
-
-\subsubsection{adasdasdaaaa}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
-
-\subsection{adasdasda}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
-
-\section{Projekt}
- Okreslenie wymagan, projekt rozwiazania problemu.
+\subsubsection{Bold}
+Ale to jeszcze nie wszystko. Tekst możemy także \textbf{pogrubić}.
  
- \subsection{adasdasda}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
+\subsection{Znaki specjalne}
+W tekście możemy stosować wiele znaków specjalnych. Oto one. Albo nie. Teraz jeszcze napiszę kilka słów, a znaki specjalne przedstwione zostaną w kolejnym paragrafie --- są bardzo ważne.\par
+Znaki specjalne: - -- --- \# \$ \% \^{} \& \_ \{ \} \~{} \par
+Oto znaki specjalne (z klamrami na końcu): \slash{} \textbackslash{} \ldots{} \textcelsius{} \texteuro{} \textGamma{} \textDelta{} \textTheta{} \textLambda{} \textPi{} \textSigma{} \textPhi{} \textPsi{} \textOmega{} \textalpha{} \textbeta{} \textgamma{} \textdelta{} \textepsilon{} \texteta{} \texttheta{} \textiota{} \textkappa{} \textlambda{} \textmugreek{} \textnu{} \textxi{} \textpi{} \textrho{} \textsigma{} \texttau{} \textupsilon{} \textphi{} \textchi{} \textpsi{} \textomega{}. \par
+Today wstawia datę, więc umieścimy tą komendę w nowym paragrafie: \today{}.
 
-\subsubsection{adasdasdaaaa}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
+\subsection{Środowiska}
+W tym podrozdziale przedstawione zostaną wszystkie obsługiwane przez omawiany konwerter środowiska (zdziwieni? Konwerter jest naprawdę zaawansowany).
 
-\subsubsection{adasdasdaaaa}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
+\subsubsection{Itemize}
+Poniżej lista punktowana. Możliwości jest kilka:
+\begin{itemize}
+\item Punkt pierwszy
+\item Kolejny
+\item Następny \textbf{pogrubiony}, ładne pogrubienie
+\item A ten \emph{wyróżniony},  ładne wyróżnienie
+\item A ten z kolei \underline{podkreślony}, ładne podkreślenie
+\end{itemize}
+A to nowy paragraf po liście punktowanej.
 
-\subsection{adasdasda}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
+\subsubsection{Enumerate}
+Poniżej lista numerowana. Możliwości jest kilka:
+\begin{enumerate}
+\item Punkt pierwszy
+\item Kolejny
+\item Następny \textbf{pogrubiony}, ładne pogrubienie
+\item A ten \emph{wyróżniony}, ładne wyróżnienie
+\item A ten z kolei \underline{podkreślony}, ładne podkreślenie
+\end{enumerate}
+A to nowy paragraf po liście numerowanej.
 
-\section{Implementacja}
+\subsubsection{Flushleft}
+Tutaj przedstawiam blok tekstu wyrównany do lewej:
+\begin{flushleft}
+Ten tekst jest wyrównany do lewej strony. Czary\ldots{} Tutaj dzieją się czary.
+\end{flushleft}
+A to nowy paragraf po bloku wyrównanym do lewej.
 
-Implementacja projektu, co zostalo zaimplementowane, jak zostalo zaimplementowane, jak zostaly spelnione wymagania.
+\subsubsection{Center}
+Tutaj przedstawiam blok tekstu wyśrodkowany:
+\begin{center}
+Ten tekst jest wyśrodkowany. Czary\ldots{} Tutaj dzieją się czary.
+\end{center}
+A to nowy paragraf po bloku wyśrodkowanym.
 
-\subsection{adasdasda}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
+\subsubsection{Flushright}
+Tutaj przedstawiam blok tekstu wyrównany do prawej:
+\begin{flushright}
+Ten tekst jest wyrównany do prawej strony. Czary\ldots{} Tutaj dzieją się czary.
+\end{flushright}
+A to nowy paragraf po bloku wyrównanym do prawej.
 
-\subsection{adasdasda}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
+\subsubsection{Quote}
+Tutaj przedstawiam blok tekstu cytowanego:
+\begin{quote}
+Ten tekst jest cytowany. Czary\ldots{} Tutaj dzieją się czary.
+\end{quote}
+A to nowy paragraf po bloku cytowanym.
 
-\subsubsection{adasdasdaaaa}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
+\subsubsection{Verbatim}
+Tutaj przedstawiam blok tekstu, który zostanie umieszczony w dokumencie w sposób dosłowny:
+\begin{verbatim}
+Tekst dużo spacji       dużo, prawda?
+\end{verbatim}
+A to nowy paragraf po bloku verbatim.
 
-\subsubsection{adasdasdaaaa}
-asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd
+\subsubsection{Tabular}
+Poniżej przykładowa tabela: \newline
+\begin{tabular}{|c|c|c|}
+	\hline
+	\emph{Kolumna 1} & Kolumna 2 & Kolumna 3 \\ \hline
+	Wiersz 2 & Wiersz 2 & \textbf{Wiersz 2} \\ \hline
+	Wiersz 3 & \underline{Wiersz 3} & Wiersz 3 \\
+	\hline
+\end{tabular}
+\newline
+Koniec tabeli. To już nowy akapit.
+
+
+\section{Zakończenie}
+Dokument ten jest dowodem na to, iż założenia zadania projektowego zostały w pełni zrealizowane. Mam nadzieję, że wszystkie elementy zostały w nim zawarte. Z wyjątkiem sytuacji, w których konieczne jest użycie nieobsługiwanych przez nasz konwerter wyrażeń matematycznych, może okazać się on naprawdę przydatny (oczywiście do podstawowych zastosowań). Jako autorzy jesteśmy zadowoleni z osiągniętego rezultatu. Z pewnościa warto byłoby zająć się rozwojem tego narzędzia (pozbycie się ograniczeń, obsługa wyrażeń matematycznych, obsługa bardziej zaawansowanych tabel, etc.).
 
 \end{document}
 

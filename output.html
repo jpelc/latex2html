@@ -1,67 +1,95 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-  <style>body {font-family: Georgia, serif;font-size: 14px;margin: 0;padding: 0;}#a4content {width: 21cm;padding: 2cm;margin: 1cm auto;}#titleBlock {width: 21cm;padding: 1cm;margin: 3cm auto;}</style>
-  <title>Tytuł pracy</title>
+  <meta charset="UTF-8" />
+  <title>Konwerter LaTeX2HTML</title>
+  <style>body {background-color: #E6E6E6;font-family: Georgia, serif;font-size: 10pt;margin: 0;padding: 0;line-height:150%}#a4content {background-color: #FFFFFF;width: 15.92cm;padding: 0 1.0in 0 1.0in;margin: 0 auto; margin-bottom: 3in;}#titleBlock {width: 15.92cm;padding: 0;padding-top: 1.3in;padding-bottom: 0.05in;margin: 0 auto;}p {margin:0;}table,th,td {border:1px solid black; float:center; border-collapse:collapse;}</style>
  </head>
  <body>
-  <div id="titleBlock">
-   <h1 style="text-align:center;">Tytuł pracy</h1>
-   <h2 style="text-align:center;">Alojzy Babel</h2>
-   <h3 style="text-align:center;">2012</h3>
-  </div>
   <div id="a4content">
-   <p></p>
-   <h2 class="section">1. Wstep</h2>
-   <p>Jasne ale<br /> ale <q>quoted</q> ale # ale $ ale % ale ^ ale &amp; ale _ ale { ale } ale ~ ale postawienie problemu, okreslenie <em>Glownych Celow Pracy</em> .</p>
-   <h3 class="subsection">1.1. adasdasda</h3>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as</p>
-   <p>dasd asd asd sd asd asd as ads a sdasdasdas das <span style="text-decoration:underline;">dasdasd asd asdasdasd sas</span> da asdasdasdasd asd asda sd asd asdasd</p>
-   <h4 class="subsubsection">1.1.1. adasdasdaaaa</h4>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd<br /> asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h4 class="subsubsection">1.1.2. adasdasdaaaa</h4>
-   <p>asdasdasd/ sa\ dasd… asd sadas 10.06.2014 das… da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h3 class="subsection">1.2. adasdassssda</h3>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
+   <div id="titleBlock" style="background-color: #FFFFFF;">
+    <h2 style="font-size: 1.75em; text-align:center;">Konwerter LaTeX2HTML</h2>
+    <h3 style="text-align:center;">Jakub Pelc, Tomasz Korecki</h3>
+    <h3 style="text-align:center;">2014</h3>
+   </div>
+   <h2 class="section">1 Wstęp</h2>
+   <p style="text-align: justify;">Ten dokument stanowi prezentację możliwości stworzonego przez nas konwertera. W poszczeg&oacute;lnych rozdziałach i podrozdziałach przedstawione zostaną kolejne konstrukcje, kt&oacute;re obsługiwane są przez aplikację.</p>
+   <p style="text-align: justify; text-indent: 20pt;">Ten tekst stanowi nowy akapit. W celu jego uzyskania zastosowana została komenda <q>par</q> , kt&oacute;ra w tym tekście umieszczona została w cudzysłowie (kt&oacute;ry jest kolejną specjalną konstrukcją).<br /> O proszę, nowa linia.</p>
+   <h2 class="section">2 Obsługiwane konstrukcje</h2>
+   <p style="text-align: justify;">W tym rozdziale przedstawione zostaną konstrukcje obsługiwane przez nasz konwerter.</p>
+   <h3 class="subsection">2.1 Operacje na tekście</h3>
+   <p style="text-align: justify;">W tym podrozdziale przedstawione zostaną sposoby modyfikacji tekstu.</p>
+   <h4 class="subsubsection">2.1.1 Emph</h4>
+   <p style="text-align: justify;">Tekst może być standardowy. Jednak możliwe jest, aby <em>był wyr&oacute;żniony</em> . Nie są to jednak jedyne możliwości jego modyfikacji. W dalszej części zostanie to udowodnione.</p>
+   <h4 class="subsubsection">2.1.2 Underline</h4>
+   <p style="text-align: justify;">Dotarliśmy do dowodu. Tekst może też być <span style="text-decoration:underline;">podkreślony</span> .</p>
+   <h4 class="subsubsection">2.1.3 Bold</h4>
+   <p style="text-align: justify;">Ale to jeszcze nie wszystko. Tekst możemy także <b>pogrubić</b> .</p>
+   <h3 class="subsection">2.2 Znaki specjalne</h3>
+   <p style="text-align: justify;">W tekście możemy stosować wiele znak&oacute;w specjalnych. Oto one. Albo nie. Teraz jeszcze napiszę kilka sł&oacute;w, a znaki specjalne przedstwione zostaną w kolejnym paragrafie — są bardzo ważne.</p>
+   <p style="text-align: justify; text-indent: 20pt;">Znaki specjalne: - – — # $ % ^ &amp; _ { } ~</p>
+   <p style="text-align: justify; text-indent: 20pt;">Oto znaki specjalne (z klamrami na końcu):/\…℃ € ᴦ Δ Θ Λ Π Σ Φ Ψ Ω α β γ δ ε η θ ι κ λ μ ν ξ π ρ σ τ υ φ χ ψ ω .</p>
+   <p style="text-align: justify; text-indent: 20pt;">Today wstawia datę, więc umieścimy tą komendę w nowym paragrafie: 16.06.2014 .</p>
+   <h3 class="subsection">2.3 Środowiska</h3>
+   <p style="text-align: justify;">W tym podrozdziale przedstawione zostaną wszystkie obsługiwane przez omawiany konwerter środowiska (zdziwieni? Konwerter jest naprawdę zaawansowany).</p>
+   <h4 class="subsubsection">2.3.1 Itemize</h4>
+   <p style="text-align: justify;">Poniżej lista punktowana. Możliwości jest kilka:</p>
    <ul>
-    <li>Co? Przedmiot, problem.</li>
-    <li>Jak? (Metoda , kr&oacute;ko).</li>
-    <li>Dlaczego? <em>erasa</em> problemu badawczego.</li>
-    <li>Po co? Implikacje, _ konsekwencje, walory.</li>
-    <li>Co bedzie w kolejnych rozdzialach?</li>
+    <li>Punkt pierwszy</li>
+    <li>Kolejny</li>
+    <li>Następny <b>pogrubiony</b> , ładne pogrubienie</li>
+    <li>A ten <em>wyr&oacute;żniony</em> , ładne wyr&oacute;żnienie</li>
+    <li>A ten z kolei <span style="text-decoration:underline;">podkreślony</span> , ładne podkreślenie</li>
    </ul>
-   <p>asdasdasdaskjd kjasdkjh askjdh akjshd jashdk ashdkj askdj aksjdh kasjdh kajsh kjashdk jashdk jhaskjdh</p>
-   <h2 class="section">2. Podstawy teoretyczne</h2>
-   <p>Opis zagadnien zwiazanych z analizowanym problemem.</p>
-   <h3 class="subsection">2.1. adasdasda</h3>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h4 class="subsubsection">2.1.1. adasdasdaaaa</h4>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h4 class="subsubsection">2.1.2. adasdasdaaaa</h4>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h3 class="subsection">2.2. adasdasda</h3>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h2 class="section">3. Projekt</h2>
-   <p>Okreslenie wymagan, projekt rozwiazania problemu.</p>
-   <h3 class="subsection">3.1. adasdasda</h3>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h4 class="subsubsection">3.1.1. adasdasdaaaa</h4>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h4 class="subsubsection">3.1.2. adasdasdaaaa</h4>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h3 class="subsection">3.2. adasdasda</h3>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h2 class="section">4. Implementacja</h2>
-   <p>Implementacja projektu, co zostalo zaimplementowane, jak zostalo zaimplementowane, jak zostaly spelnione wymagania.</p>
-   <h3 class="subsection">4.1. adasdasda</h3>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h3 class="subsection">4.2. adasdasda</h3>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h4 class="subsubsection">4.2.1. adasdasdaaaa</h4>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
-   <h4 class="subsubsection">4.2.2. adasdasdaaaa</h4>
-   <p>asdasdasd sa dasd asd sadas das da sd as dasd as dasd asd asd sd asd asd as ads a sdasdasdas das dasdasd asd asdasdasd sas da asdasdasdasd asd asda sd asd asdasd</p>
+   <p style="text-align: justify;">A to nowy paragraf po liście punktowanej.</p>
+   <h4 class="subsubsection">2.3.2 Enumerate</h4>
+   <p style="text-align: justify;">Poniżej lista numerowana. Możliwości jest kilka:</p>
+   <ol>
+    <li>Punkt pierwszy</li>
+    <li>Kolejny</li>
+    <li>Następny <b>pogrubiony</b> , ładne pogrubienie</li>
+    <li>A ten <em>wyr&oacute;żniony</em> , ładne wyr&oacute;żnienie</li>
+    <li>A ten z kolei <span style="text-decoration:underline;">podkreślony</span> , ładne podkreślenie</li>
+   </ol>
+   <p style="text-align: justify;">A to nowy paragraf po liście numerowanej.</p>
+   <h4 class="subsubsection">2.3.3 Flushleft</h4>
+   <p style="text-align: justify;">Tutaj przedstawiam blok tekstu wyr&oacute;wnany do lewej:<span style="display: block; text-align:left;">Ten tekst jest wyr&oacute;wnany do lewej strony. Czary… Tutaj dzieją się czary.</span> A to nowy paragraf po bloku wyr&oacute;wnanym do lewej.</p>
+   <h4 class="subsubsection">2.3.4 Center</h4>
+   <p style="text-align: justify;">Tutaj przedstawiam blok tekstu wyśrodkowany:<span style="display: block; text-align:center;">Ten tekst jest wyśrodkowany. Czary… Tutaj dzieją się czary.</span> A to nowy paragraf po bloku wyśrodkowanym.</p>
+   <h4 class="subsubsection">2.3.5 Flushright</h4>
+   <p style="text-align: justify;">Tutaj przedstawiam blok tekstu wyr&oacute;wnany do prawej:<span style="display: block; text-align:right;">Ten tekst jest wyr&oacute;wnany do prawej strony. Czary… Tutaj dzieją się czary.</span> A to nowy paragraf po bloku wyr&oacute;wnanym do prawej.</p>
+   <h4 class="subsubsection">2.3.6 Quote</h4>
+   <p style="text-align: justify;">Tutaj przedstawiam blok tekstu cytowanego:</p>
+   <blockquote>
+    Ten tekst jest cytowany. Czary… Tutaj dzieją się czary.
+   </blockquote>
+   <p style="text-align: justify;">A to nowy paragraf po bloku cytowanym.</p>
+   <h4 class="subsubsection">2.3.7 Verbatim</h4>
+   <p style="text-align: justify;">Tutaj przedstawiam blok tekstu, kt&oacute;ry zostanie umieszczony w dokumencie w spos&oacute;b dosłowny:</p>
+   <pre>Tekst dużo spacji       dużo, prawda?</pre>
+   <p style="text-align: justify;">A to nowy paragraf po bloku verbatim.</p>
+   <h4 class="subsubsection">2.3.8 Tabular</h4>
+   <p style="text-align: justify;">Poniżej przykładowa tabela:<br /></p>
+   <table>
+    <tr>
+     <td><em>Kolumna 1</em></td>
+     <td>Kolumna 2</td>
+     <td>Kolumna 3</td>
+    </tr>
+    <tr>
+     <td>Wiersz 2</td>
+     <td>Wiersz 2</td>
+     <td><b>Wiersz 2</b></td>
+    </tr>
+    <tr>
+     <td>Wiersz 3</td>
+     <td><span style="text-decoration:underline;">Wiersz 3</span></td>
+     <td>Wiersz 3</td>
+    </tr>
+   </table>
+   <p style="text-align: justify;"><br /> Koniec tabeli. To już nowy akapit.</p>
+   <h2 class="section">3 Zakończenie</h2>
+   <p style="text-align: justify;">Dokument ten jest dowodem na to, iż założenia zadania projektowego zostały w pełni zrealizowane. Mam nadzieję, że wszystkie elementy zostały w nim zawarte. Z wyjątkiem sytuacji, w kt&oacute;rych konieczne jest użycie nieobsługiwanych przez nasz konwerter wyrażeń matematycznych, może okazać się on naprawdę przydatny (oczywiście do podstawowych zastosowań). Jako autorzy jesteśmy zadowoleni z osiągniętego rezultatu. Z pewnościa warto byłoby zająć się rozwojem tego narzędzia (pozbycie się ograniczeń, obsługa wyrażeń matematycznych, obsługa bardziej zaawansowanych tabel, etc.).</p>
   </div>
  </body>
 </html>

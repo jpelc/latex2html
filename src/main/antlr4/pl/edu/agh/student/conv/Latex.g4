@@ -42,11 +42,13 @@ string		:	STRING ;
 
 expr		:	command ;
 
-command		:	KW_PARAGRAPH | KW_NEWLINE | KW_SLASH | KW_TEXTBACKSLASH | KW_LDOTS | KW_CELSIUS | KW_EURO | underline | emph | KW_TODAY | greek ;
+command		:	KW_PARAGRAPH | KW_NEWLINE | KW_SLASH | KW_TEXTBACKSLASH | KW_LDOTS | KW_CELSIUS | KW_EURO | underline | emph | bold | KW_TODAY | greek ;
 
 underline	:	KW_UNDERLINE arg ;
 
 emph		:	KW_EMPH arg ;
+
+bold		:	KW_BOLD	arg ;
 
 greek		:	KW_GREEK_CGAMMA | KW_GREEK_CDELTA | KW_GREEK_CTHETA | KW_GREEK_CLAMBDA | KW_GREEK_CPI
 				| KW_GREEK_CSIGMA | KW_GREEK_CPHI | KW_GREEK_CPSI | KW_GREEK_COMEGA | KW_GREEK_ALFA | KW_GREEK_BETA
@@ -99,12 +101,13 @@ KW_SUBSECTION	:	'\\subsection' ;
 KW_SUBSUBSECTION:	'\\subsubsection' ;
 KW_UNDERLINE	:	'\\underline' ;
 KW_EMPH			:	'\\emph' ;
+KW_BOLD			:	'\\textbf' ;
 KW_ITEM			:	'\\item' ;
 KW_HLINE		:	'\\hline' ;
 KW_CT_NAME		:	'article' ;
 KW_PAPERTYPE	:	'a4paper' ;
 KW_DOCUMENT		:	'document' ;
-KW_ENV_NAME		:	'itemize' | 'enumarate' | 'flushleft' | 'flushright' | 'center' | 'quote' | 'verbatim' | 'tabular';
+KW_ENV_NAME		:	'itemize' | 'enumerate' | 'flushleft' | 'flushright' | 'center' | 'quote' | 'verbatim' | 'tabular';
 KW_TODAY		:	'\\today{}' ;
 KW_SLASH		:	'\\slash{}' ;
 KW_TEXTBACKSLASH:	'\\textbackslash{}' ;
